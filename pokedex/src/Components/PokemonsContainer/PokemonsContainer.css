@@ -1,0 +1,16 @@
+.PokemonsContainer{
+    width: 70%;
+    height: 80%;
+    margin-top: 1rem;
+    /* background-color: blue; */
+}
+
+
+.pokemons{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1rem;
+    grid-auto-rows: 1fr;
+    justify-self: center;
+    align-self: center;
+}

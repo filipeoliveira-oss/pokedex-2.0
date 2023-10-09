@@ -1,0 +1,134 @@
+@font-face {
+    font-family: 'pokemonFont';
+    src: url('../../Assets/Fonts/Pokemon Hollow.ttf');
+}
+
+:root{
+    --timing: 400ms;
+    --rotation: 30deg;
+    --transitionDelay: 150ms
+}
+
+html {
+    color-scheme: light;
+}
+
+#root{
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+    perspective: 1000px;
+}
+
+img{
+    max-width: 100%;
+}
+
+.card{
+    width: 300px;
+    aspect-ratio: 9/12;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: rotate var(--timing) ease;
+    cursor: pointer;
+    background-color: whitesmoke;
+}
+
+
+.cardbg{
+    position: absolute;
+    z-index: 10;
+    object-fit: contain;
+    height: 100%;
+    object-position: center;
+}
+
+.card:hover{
+    rotate: x var(--rotation);
+}
+
+.card::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* background: lime; */
+    z-index: 100;
+    background-image: radial-gradient(circle , transparent 150px, grey);
+    opacity: 0;
+    transition: opacity var(--timing);
+}
+
+.card:hover::before{
+    opacity: 1;
+}
+
+.card::after{
+    content: '';
+    position: absolute;
+    inset: 80% 0.5rem 0.5rem;
+    translate: 0 ;
+    transform: translateZ(-100px);
+    background:grey ;
+    filter:blur(1rem);
+    z-index: -1;
+    transition: 
+        translate var(--timing),
+        rotate var(--timing) ;
+}
+
+.card:hover::after{
+    rotate: X calc(-1 * var(--rotation));
+    translate: 0 30px;
+}
+
+.logo, .front-image{
+    position: absolute;
+}
+
+.logo{
+    z-index: 1000;
+    /* filter: invert(1); */
+    width: 75%;
+    margin-inline: auto;
+    inset: auto 0 2rem;
+    transform: translateZ(20px) translateY(0);
+    
+    transition: var(--timing);
+    transition-delay: var(--transitionDelay);
+    font-family: 'pokemonFont';
+    color: black;
+    background: rgba(255, 255, 255, 0.64);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    text-align: center;
+    height: fit-content;
+}
+
+.card:hover .logo{
+    transform: translateZ(50px) translateY(-2rem);
+    rotate: X calc(-1 * var(--rotation));
+}
+
+.front-image{
+    opacity: 0;
+    transition: var(--timing);
+    z-index: 100;
+    scale: 1.10;
+    height: 100%;
+    max-height: 22rem;
+    /* background-color: red; */
+    transform-origin: bottom;
+    bottom: 0;
+    transition-delay: var(--transitionDelay);
+    /* margin-left: 2rem; */
+    /* clip-path: inset(0 5% 0 5%); */
+}
+
+.card:hover .front-image{
+    opacity: 1;
+    transform: translateZ(10px) translateY(-1rem);
+    rotate: X calc(-1 * var(--rotation));
+}
